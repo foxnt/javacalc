@@ -1,0 +1,230 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        String mystring = in.nextLine();
+
+        mystring = mystring.replaceAll("\\s", "");
+        char[] mystringArr = mystring.toCharArray();
+
+        char[] arab_num = new char[]{ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/' };
+        char[] rome_num = new char[]{ 'I', 'V', 'X' };
+
+        int count_operator = 0;
+        for (int i = 0; i < mystringArr.length; i++) {
+
+            if (mystringArr[i] == arab_num[10] |
+                    mystringArr[i] == arab_num[11] |
+                    mystringArr[i] == arab_num[12] |
+                    mystringArr[i] == arab_num[13]) {
+                count_operator++;
+            }
+
+        }
+        if (count_operator != 1) {
+            System.out.println("count_operator != 1");
+            System.exit(0);
+        }
+        if (mystringArr[0] == arab_num[10] |
+                mystringArr[0] == arab_num[11] |
+                mystringArr[0] == arab_num[12] |
+                mystringArr[0] == arab_num[13] |
+                mystringArr[mystringArr.length - 1] == arab_num[10] |
+                mystringArr[mystringArr.length - 1] == arab_num[11] |
+                mystringArr[mystringArr.length - 1] == arab_num[12] |
+                mystringArr[mystringArr.length - 1] == arab_num[13]) {
+            System.out.println("оператор в начале или конце");
+            System.exit(0);
+        }
+
+        boolean rome_mode = false;
+        for (char x: rome_num ){
+            if (x == mystringArr[0]){
+                 rome_mode = true;
+            }
+        }
+
+        if ( !rome_mode ) {
+            boolean found = false;
+            for (int i = 0; i < mystringArr.length; i++) {
+                found = false;
+                for (int j = 0; j < arab_num.length; j++) {
+                    if (mystringArr[i] == arab_num[j]) {
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    System.out.println("Введен неверный символ");
+                    System.exit(0);
+                }
+            }
+
+            if (mystringArr[0] == '0') {
+                System.out.println("тут ноль");
+                System.exit(0);
+            }
+            if (mystringArr.length < 3 | mystringArr.length > 5) {
+                System.out.println("Многа или мала цыфор");
+                System.exit(0);
+            }
+
+            if (mystringArr.length == 5) {
+                if (mystringArr[4] == '0') {
+                    System.out.println("тут ноль");
+                    System.exit(0);
+                }
+                if (mystringArr[2] == '+')
+                    System.out.println("20");
+                if (mystringArr[2] == '-')
+                    System.out.println("0");
+                if (mystringArr[2] == '*')
+                    System.out.println("100");
+                if (mystringArr[2] == '/')
+                    System.out.println("1");
+            }
+            if (mystringArr.length == 4) {
+
+            }
+            if (mystringArr[1] == '+') {
+                if (mystringArr[2] == '0') {
+                    System.out.println("тут ноль");
+                    System.exit(0);
+                }
+
+            } else if (mystringArr[2] == '+') {
+                if (mystringArr[3] == '0') {
+                    System.out.println("тут ноль");
+                    System.exit(0);
+                }
+                ;
+
+                if (mystringArr[1] == '+') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    System.out.println(sum + 10);
+
+                } else if (mystringArr[2] == '+') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[3]));
+                    System.out.println(sum + 10);
+
+                }
+                if (mystringArr[1] == '-') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    System.out.println(sum - 10);
+
+                } else if (mystringArr[2] == '-') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[3]));
+                    System.out.println(10 - sum);
+
+                }
+                if (mystringArr[1] == '*') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    System.out.println(sum * 10);
+
+                } else if (mystringArr[2] == '*') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[3]));
+                    System.out.println(sum * 10);
+
+                }
+                if (mystringArr[1] == '/') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    System.out.println(sum / 10);
+
+                } else if (mystringArr[2] == '/') {
+                    int sum = Integer.parseInt(String.valueOf(mystringArr[3]));
+                    System.out.println(10 / sum);
+
+
+                }
+
+
+            }
+            if (mystringArr.length == 3) {
+                if (mystringArr[2] == '0') {
+                    System.out.println("тут ноль");
+                    System.exit(0);
+                }
+                if (mystringArr[1] == '+') {
+                    int sum1 = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    int sum2 = Integer.parseInt(String.valueOf(mystringArr[2]));
+                    System.out.println(sum1 + sum2);
+                } else if (mystringArr[1] == '-') {
+                    int sum1 = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    int sum2 = Integer.parseInt(String.valueOf(mystringArr[2]));
+                    System.out.println(sum1 - sum2);
+                } else if (mystringArr[1] == '*') {
+                    int sum1 = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    int sum2 = Integer.parseInt(String.valueOf(mystringArr[2]));
+                    System.out.println(sum1 * sum2);
+                } else if (mystringArr[1] == '/') {
+                    int sum1 = Integer.parseInt(String.valueOf(mystringArr[0]));
+                    int sum2 = Integer.parseInt(String.valueOf(mystringArr[2]));
+                    System.out.println(sum1 / sum2);
+                }
+            }
+        }
+
+        if (rome_mode){
+
+            String[] romenumArr = new String[] {"нуля тут нет)", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX" };
+
+            int first_num = 0;
+            int second_num = 0;
+
+            for ( int i = 10; i != 0 ; i--){
+                if (mystring.startsWith(romenumArr[i])){
+                    first_num = i;
+                    for ( int j = 10; j != 0 ; j--){
+                        if (mystring.endsWith(romenumArr[j])){
+                            second_num = j;
+                            if (j == 10 & mystring.endsWith(romenumArr[j-1])){
+                            second_num = j-1;
+
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            int index = -1;
+            try {
+                if (index != mystring.indexOf('+')) {
+                    System.out.println(romenumArr[first_num + second_num]);
+                    System.exit(0);
+                }
+                if (index != mystring.indexOf('-')) {
+                    System.out.println(romenumArr[first_num - second_num]);
+                    System.exit(0);
+                }
+                if (index != mystring.indexOf('*')) {
+                    if(first_num * second_num <= 20){
+                    System.out.println(romenumArr[first_num * second_num]);
+                    System.exit(0);
+                    }
+
+                    //тут должна быть логика для чисел больше 20
+
+                }
+                if (index != mystring.indexOf('/')) {
+                    System.out.println(romenumArr[first_num / second_num]);
+                    System.exit(0);
+                }
+            } catch(Exception e) {
+                System.out.println("Чтото пошло не так");
+            }
+
+
+
+
+
+
+        }
+        System.out.println("ok");
+    }
+}
